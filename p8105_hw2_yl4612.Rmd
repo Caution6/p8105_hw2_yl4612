@@ -95,3 +95,31 @@ The resulting dataset has `r nrow(NYC_df)` rows and `r ncol(NYC_df)` columns.
 
 These data have not been tidy yet. For example, route 1 to 11 occupy 11 columns. If we could arrange them, dataset will be more tidy.
 
+Questions answered using these data;
+
+* There are `r nrow(distinct(NYC_df, station_name, line))` distinct stations. 
+
+* There are `r filter(NYC_df, ada == "TRUE") %>% distinct(station_name, line) %>% nrow()` stations as ADA compliant.
+
+* `r nrow(filter(NYC_df, vending == "NO", entry == "TRUE")) / nrow(filter(NYC_df, vending == "NO"))` of station entrances/exits without vending allow entrance.
+
+Reformat the NYC Transit dataset
+
+```{r}
+re_NYC = NYC_df %>% 
+  mutate_at(vars(route8:route11), as.character) %>% 
+  pivot_longer(
+    route1:route11,
+    names_prefix = "route",
+    names_to = "route_number",
+    values_to = "route_name"
+  )
+```
+
+`r filter(re_NYC, route_name == "A") %>% distinct(station_name, line) %>% nrow()` distinct stations serve the A train.
+
+`r filter(re_NYC, route_name == "A", ada == "TRUE") %>% distinct(station_name, line) %>% nrow()` Of the stations that serve the A train, stations are ADA compliant.
+
+## Problem 3
+
+
