@@ -209,3 +209,10 @@ pols_snp_unem =
   left_join(unem_df, by = c("year", "month"))
 ```
 
+Pols_month dataset has `r nrow(pm_df)` rows and `r ncol(pm_df)` columns. The range of years is from `r max(pull(pm_df, year))` to `r min(pull(pm_df, year))`. It contains information about number of national politicians who are democratic or republican at any given time. It includes key variables named as `r colnames(pm_df)`.
+
+Snp dataset has `r nrow(snp_df)` rows and `r ncol(snp_df)` columns. The range of years is from `r min(pull(snp_df, year))` to `r max(pull(snp_df, year))`. It contains information about Standard & Poor’s stock market index, which is often used as a representative measure of stock market as a whole. It includes key variables named as `r colnames(snp_df)`.
+
+Unemployment dataset has `r nrow(unem_df)` rows and `r ncol(unem_df)` columns. The range of years is from `r min(pull(unem_df, year))` to `r max(pull(unem_df, year))`. It contains information about unemployment rate at any given month. It includes key variables named as `r colnames(unem_df)`.
+
+Resulting dataset has `r nrow(pols_snp_unem)` rows and `r ncol(pols_snp_unem)` columns. The range of years is from `r min(pull(pols_snp_unem, year))` to `r max(pull(pols_snp_unem, year))`. It contains information merged from three datasets above. It includes key variables named as `r colnames(pols_snp_unem)`.
