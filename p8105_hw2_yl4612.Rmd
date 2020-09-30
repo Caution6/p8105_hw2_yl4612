@@ -72,3 +72,26 @@ This dataset contains information from the Mr. Trashwheel trash collector in Bal
 
 * The median number of sports balls found in a dumpster in 2017 was `r trashwheel_df %>% filter(year == 2017) %>% pull(sports_balls) %>% median()`
 * The total precipitation in 2018 was `r precip_df %>% filter(year == 2018) %>% pull(total) %>% sum()` inches.
+
+## Problem 2
+
+Read and clean the NYC Transit dataset.
+
+```{r}
+NYC_df = 
+  read_csv("./data/NYC_Transit_Subway_Entrance_And_Exit_Data.csv") %>% 
+  janitor::clean_names() %>% 
+  select(line:vending, -exit_only, ada) %>% 
+  mutate(
+    entry = ifelse(entry %in% c("YES"), TRUE, FALSE)
+    )
+```
+
+NYC Transit dataset contains information from subway system in NYC. It includes information about line, station, route, entrance, entry/exit status, vending, staff, and ADA. 
+
+So far, I have cleaned the variables' names by clean_names, retained all varibales I want by select, and converted entry variable from character to logical variable by mutate. 
+
+The resulting dataset has `r nrow(NYC_df)` rows and `r ncol(NYC_df)` columns. 
+
+These data have not been tidy yet. For example, route 1 to 11 occupy 11 columns. If we could arrange them, dataset will be more tidy.
+
